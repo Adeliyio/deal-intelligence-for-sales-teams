@@ -1,10 +1,12 @@
 """
 API route implementations for deal intelligence endpoints.
 """
+import os
+import json
 import numpy as np
 import pandas as pd
 from fastapi import APIRouter, HTTPException, Depends
-from typing import Dict
+from typing import Dict, Any
 
 from backend.api.schemas import (
     DealAnalysisRequest,
@@ -242,6 +244,56 @@ async def pipeline_overview(
         avg_risk_score=round(float(risk_preds["risk_score"].mean()), 4),
         risk_distribution={str(k): int(v) for k, v in risk_counts.items()},
     )
+
+
+@router.get("/evaluation-results")
+async def evaluation_results():
+    """
+    Return pre-computed evaluation metrics.
+    Includes model performance, calibration analysis, and Critic A/B test results.
+    """
+    eval_path = "models/saved/evaluation_results.json"
+    if not os.path.exists(eval_path):
+        raise HTTPException(status_code=404, detail="Evaluation results not found. Run scripts/run_evaluation.py first.")
+
+    with open(eval_path, "r") as f:
+        results = json.load(f)
+
+    return results
+
+
+@router.get("/deals-list")
+async def deals_list(
+    state: AppState = Depends(get_app_state),
+):
+    """Return all deals with predictions for the pipeline view."""
+    if state.features_df is None or state.win_model is None:
+        raise HTTPException(status_code=503, detail="Models not loaded")
+
+    df = state.features_df
+    X_win = prepare_inference_data(df, model_type="win")
+    X_risk = prepare_inference_data(df, model_type="risk")
+
+    win_preds = state.win_model.predict(X_win)
+    risk_preds = state.risk_model.predict(X_risk)
+
+    deals = []
+    for i, (_, row) in enumerate(df.iterrows()):
+        deals.append({
+            "deal_id": row["deal_id"],
+            "win_probability": float(win_preds.iloc[i]["win_probability"]),
+            "risk_level": str(risk_preds.iloc[i]["risk_level"]),
+            "risk_score": float(risk_preds.iloc[i]["risk_score"]),
+            "deal_value": float(row.get("deal_value", 0)),
+            "stage": row.get("stage", "unknown"),
+            "silence_gap_days": float(row.get("silence_gap_days", 0) or 0),
+            "engagement_per_week": float(row.get("engagement_per_week", 0) or 0),
+            "industry": row.get("industry", ""),
+            "deal_size_bucket": row.get("deal_size_bucket", ""),
+            "outcome": row.get("outcome", ""),
+        })
+
+    return {"deals": deals}
 
 
 # --- Helper functions ---
