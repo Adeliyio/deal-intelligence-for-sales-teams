@@ -1,0 +1,408 @@
+{
+  "win_model_evaluation": {
+    "model_name": "Win Probability Model",
+    "n_test_samples": 11,
+    "discrimination": {
+      "auc_roc": 0.9643,
+      "auc_ci_lower": 0.7857,
+      "auc_ci_upper": 1.0,
+      "roc_curve": {
+        "fpr": [
+          0.0,
+          0.0,
+          0.0,
+          0.14285714285714285,
+          0.14285714285714285,
+          0.5714285714285714,
+          0.8571428571428571,
+          1.0
+        ],
+        "tpr": [
+          0.0,
+          0.25,
+          0.75,
+          0.75,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "thresholds": [
+          Infinity,
+          0.8676801522572836,
+          0.681813249985377,
+          0.27532824873924255,
+          0.2343247582515081,
+          0.09286720057328542,
+          0.09199037402868271,
+          0.09171561151742935
+        ]
+      }
+    },
+    "calibration": {
+      "brier_score_calibrated": 0.0773,
+      "brier_score_raw": 0.0745,
+      "brier_improvement": -0.0028,
+      "ece_calibrated": 0.1484,
+      "ece_raw": 0.1585,
+      "calibration_curve": {
+        "prob_true": [
+          0.0,
+          0.5,
+          1.0,
+          1.0
+        ],
+        "prob_pred": [
+          0.09296615049242973,
+          0.25482650349537533,
+          0.681813249985377,
+          0.8668561975161235
+        ]
+      },
+      "calibration_curve_raw": {
+        "prob_true": [
+          0.0,
+          0.5,
+          1.0
+        ],
+        "prob_pred": [
+          0.12162549793720245,
+          0.20574481040239334,
+          0.8581645091374716
+        ]
+      }
+    },
+    "threshold_analysis": {
+      "threshold_analysis": [
+        {
+          "threshold": 0.3,
+          "precision": 1.0,
+          "recall": 0.75,
+          "f1": 0.8571,
+          "true_positives": 3,
+          "false_positives": 0,
+          "true_negatives": 7,
+          "false_negatives": 1
+        },
+        {
+          "threshold": 0.4,
+          "precision": 1.0,
+          "recall": 0.75,
+          "f1": 0.8571,
+          "true_positives": 3,
+          "false_positives": 0,
+          "true_negatives": 7,
+          "false_negatives": 1
+        },
+        {
+          "threshold": 0.45,
+          "precision": 1.0,
+          "recall": 0.75,
+          "f1": 0.8571,
+          "true_positives": 3,
+          "false_positives": 0,
+          "true_negatives": 7,
+          "false_negatives": 1
+        },
+        {
+          "threshold": 0.5,
+          "precision": 1.0,
+          "recall": 0.75,
+          "f1": 0.8571,
+          "true_positives": 3,
+          "false_positives": 0,
+          "true_negatives": 7,
+          "false_negatives": 1
+        },
+        {
+          "threshold": 0.55,
+          "precision": 1.0,
+          "recall": 0.75,
+          "f1": 0.8571,
+          "true_positives": 3,
+          "false_positives": 0,
+          "true_negatives": 7,
+          "false_negatives": 1
+        },
+        {
+          "threshold": 0.6,
+          "precision": 1.0,
+          "recall": 0.75,
+          "f1": 0.8571,
+          "true_positives": 3,
+          "false_positives": 0,
+          "true_negatives": 7,
+          "false_negatives": 1
+        },
+        {
+          "threshold": 0.7,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6667,
+          "true_positives": 2,
+          "false_positives": 0,
+          "true_negatives": 7,
+          "false_negatives": 2
+        }
+      ],
+      "optimal_threshold": 0.3,
+      "optimal_f1": 0.8571
+    },
+    "shap_analysis": {
+      "error": "No module named 'shap'",
+      "fallback": "Using built-in feature importance"
+    },
+    "failure_modes": {
+      "sparse_activity": {
+        "description": "Deals with fewer than 5 logged activities",
+        "n_deals": 4,
+        "avg_predicted_proba": 0.0933,
+        "actual_win_rate": 0.0,
+        "calibration_error": 0.0933
+      },
+      "long_cycle_enterprise": {
+        "description": "Enterprise deals with long sales cycles",
+        "n_deals": 2,
+        "avg_predicted_proba": 0.1632,
+        "actual_win_rate": 0.5,
+        "calibration_error": 0.3368
+      },
+      "worst_predictions": {
+        "description": "Deals with largest prediction error",
+        "deals": [
+          {
+            "index": 10,
+            "predicted": 0.8677,
+            "actual": 1,
+            "error": 0.1323
+          },
+          {
+            "index": 7,
+            "predicted": 0.866,
+            "actual": 1,
+            "error": 0.134
+          },
+          {
+            "index": 9,
+            "predicted": 0.2753,
+            "actual": 0,
+            "error": 0.2753
+          },
+          {
+            "index": 3,
+            "predicted": 0.6818,
+            "actual": 1,
+            "error": 0.3182
+          },
+          {
+            "index": 8,
+            "predicted": 0.2343,
+            "actual": 1,
+            "error": 0.7657
+          }
+        ]
+      }
+    }
+  },
+  "risk_model_evaluation": {
+    "model_name": "Risk Classification Model",
+    "n_test_samples": 15,
+    "discrimination": {
+      "auc_roc": 0.5,
+      "auc_ci_lower": 0.5,
+      "auc_ci_upper": 0.5,
+      "roc_curve": {
+        "fpr": [
+          0.0,
+          1.0
+        ],
+        "tpr": [
+          0.0,
+          1.0
+        ],
+        "thresholds": [
+          Infinity,
+          0.6860378980636597
+        ]
+      }
+    },
+    "calibration": {
+      "brier_score_calibrated": 0.2226,
+      "brier_score_raw": 0.25,
+      "brier_improvement": 0.0274,
+      "ece_calibrated": 0.0194,
+      "ece_raw": 0.1667,
+      "calibration_curve": {
+        "prob_true": [
+          0.6666666666666666
+        ],
+        "prob_pred": [
+          0.6860378980636597
+        ]
+      },
+      "calibration_curve_raw": {
+        "prob_true": [
+          0.6666666666666666
+        ],
+        "prob_pred": [
+          0.4999297857284546
+        ]
+      }
+    },
+    "threshold_analysis": {
+      "threshold_analysis": [
+        {
+          "threshold": 0.3,
+          "precision": 0.6667,
+          "recall": 1.0,
+          "f1": 0.8,
+          "true_positives": 10,
+          "false_positives": 5,
+          "true_negatives": 0,
+          "false_negatives": 0
+        },
+        {
+          "threshold": 0.4,
+          "precision": 0.6667,
+          "recall": 1.0,
+          "f1": 0.8,
+          "true_positives": 10,
+          "false_positives": 5,
+          "true_negatives": 0,
+          "false_negatives": 0
+        },
+        {
+          "threshold": 0.45,
+          "precision": 0.6667,
+          "recall": 1.0,
+          "f1": 0.8,
+          "true_positives": 10,
+          "false_positives": 5,
+          "true_negatives": 0,
+          "false_negatives": 0
+        },
+        {
+          "threshold": 0.5,
+          "precision": 0.6667,
+          "recall": 1.0,
+          "f1": 0.8,
+          "true_positives": 10,
+          "false_positives": 5,
+          "true_negatives": 0,
+          "false_negatives": 0
+        },
+        {
+          "threshold": 0.55,
+          "precision": 0.6667,
+          "recall": 1.0,
+          "f1": 0.8,
+          "true_positives": 10,
+          "false_positives": 5,
+          "true_negatives": 0,
+          "false_negatives": 0
+        },
+        {
+          "threshold": 0.6,
+          "precision": 0.6667,
+          "recall": 1.0,
+          "f1": 0.8,
+          "true_positives": 10,
+          "false_positives": 5,
+          "true_negatives": 0,
+          "false_negatives": 0
+        },
+        {
+          "threshold": 0.7,
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0,
+          "true_positives": 0,
+          "false_positives": 0,
+          "true_negatives": 5,
+          "false_negatives": 10
+        }
+      ],
+      "optimal_threshold": 0.3,
+      "optimal_f1": 0.8
+    },
+    "shap_analysis": {
+      "error": "No module named 'shap'",
+      "fallback": "Using built-in feature importance"
+    },
+    "failure_modes": {
+      "sparse_activity": {
+        "description": "Deals with fewer than 5 logged activities",
+        "n_deals": 3,
+        "avg_predicted_proba": 0.686,
+        "actual_win_rate": 1.0,
+        "calibration_error": 0.314
+      },
+      "long_cycle_enterprise": {
+        "description": "Enterprise deals with long sales cycles",
+        "n_deals": 1,
+        "avg_predicted_proba": 0.686,
+        "actual_win_rate": 0.0,
+        "calibration_error": 0.686
+      },
+      "worst_predictions": {
+        "description": "Deals with largest prediction error",
+        "deals": [
+          {
+            "index": 3,
+            "predicted": 0.686,
+            "actual": 0,
+            "error": 0.686
+          },
+          {
+            "index": 5,
+            "predicted": 0.686,
+            "actual": 0,
+            "error": 0.686
+          },
+          {
+            "index": 12,
+            "predicted": 0.686,
+            "actual": 0,
+            "error": 0.686
+          },
+          {
+            "index": 13,
+            "predicted": 0.686,
+            "actual": 0,
+            "error": 0.686
+          },
+          {
+            "index": 14,
+            "predicted": 0.686,
+            "actual": 0,
+            "error": 0.686
+          }
+        ]
+      }
+    }
+  },
+  "critic_ab_test": {
+    "n_deals": 200,
+    "control": {
+      "decision_quality": 0.395,
+      "false_urgency_count": 0,
+      "false_urgency_rate": 0.0,
+      "avg_calibration_error": 0.1328,
+      "median_calibration_error": 0.1154
+    },
+    "treatment": {
+      "decision_quality": 0.425,
+      "false_urgency_count": 0,
+      "false_urgency_rate": 0.0,
+      "avg_calibration_error": 0.1216,
+      "median_calibration_error": 0.0953
+    },
+    "impact": {
+      "decision_quality_delta": 0.03,
+      "false_urgency_reduction": 0.0,
+      "false_urgency_reduction_pct": 0.0,
+      "calibration_improvement": 0.0112
+    },
+    "interpretation": "The Critic Agent did NOT reduce false urgency \u2014 further tuning needed Decision quality improved by 3.0% (more recommendations match the optimal action) Risk score calibration improved by 0.0112 points"
+  }
+}
