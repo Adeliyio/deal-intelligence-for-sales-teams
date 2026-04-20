@@ -1,0 +1,33 @@
+# API
+fastapi==0.109.0
+uvicorn==0.27.0
+pydantic==2.5.3
+
+# ML
+xgboost==2.0.3
+scikit-learn==1.4.0
+shap==0.44.1
+numpy==1.26.3
+pandas==2.1.5
+
+# LLM & Agents
+langgraph==0.0.26
+langchain==0.1.4
+langchain-openai==0.0.5
+openai==1.10.0
+
+# RAG
+faiss-cpu==1.7.4
+chromadb==0.4.22
+
+# Database
+sqlalchemy==2.0.25
+psycopg2-binary==2.9.9
+alembic==1.13.1
+
+# Evaluation
+wandb==0.16.2
+
+# Utilities
+python-dotenv==1.0.0
+httpx==0.26.0
