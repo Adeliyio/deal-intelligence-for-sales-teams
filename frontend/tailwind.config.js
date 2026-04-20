@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      sans: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+    },
     extend: {
       colors: {
         primary: {

@@ -5,82 +5,6 @@ import {
 } from 'recharts'
 import { getEvaluationResults, getPipelineOverview, EvaluationData, PipelineOverview } from '../utils/api'
 
-// Mock data matching real evaluation output for offline rendering
-const MOCK_EVAL: EvaluationData = {
-  win_model_evaluation: {
-    model_name: 'Win Probability Model',
-    n_test_samples: 11,
-    discrimination: {
-      auc_roc: 0.9643,
-      auc_ci_lower: 0.7857,
-      auc_ci_upper: 1.0,
-      roc_curve: {
-        fpr: [0, 0, 0, 0, 0, 0.143, 0.143, 1],
-        tpr: [0, 0.25, 0.5, 0.75, 1, 1, 1, 1],
-        thresholds: [1.95, 0.95, 0.88, 0.85, 0.78, 0.45, 0.12, 0.01],
-      },
-    },
-    calibration: {
-      brier_score_calibrated: 0.0773,
-      brier_score_raw: 0.0745,
-      brier_improvement: -0.0028,
-      ece_calibrated: 0.1484,
-      ece_raw: 0.16,
-      calibration_curve: { prob_true: [0, 0.14, 1], prob_pred: [0.09, 0.12, 0.87] },
-      calibration_curve_raw: { prob_true: [0, 0.14, 1], prob_pred: [0.07, 0.11, 0.92] },
-    },
-    threshold_analysis: {
-      threshold_analysis: [
-        { threshold: 0.3, precision: 0.75, recall: 1.0, f1: 0.857 },
-        { threshold: 0.4, precision: 0.75, recall: 1.0, f1: 0.857 },
-        { threshold: 0.45, precision: 1.0, recall: 0.75, f1: 0.857 },
-        { threshold: 0.5, precision: 1.0, recall: 0.75, f1: 0.857 },
-        { threshold: 0.6, precision: 1.0, recall: 0.75, f1: 0.857 },
-        { threshold: 0.7, precision: 1.0, recall: 0.5, f1: 0.667 },
-      ],
-      optimal_threshold: 0.3,
-      optimal_f1: 0.857,
-    },
-    shap_analysis: {
-      top_features: [
-        { feature: 'engagement_score', mean_shap_value: 0.312 },
-        { feature: 'engagement_per_week', mean_shap_value: 0.245 },
-        { feature: 'response_count', mean_shap_value: 0.198 },
-        { feature: 'decay_weighted_engagement', mean_shap_value: 0.089 },
-        { feature: 'silence_gap_days', mean_shap_value: 0.067 },
-        { feature: 'stakeholder_count', mean_shap_value: 0.042 },
-        { feature: 'deal_velocity_ratio', mean_shap_value: 0.028 },
-        { feature: 'avg_response_time_hours', mean_shap_value: 0.019 },
-      ],
-    },
-    failure_modes: {
-      sparse_activity: { description: 'Deals with fewer than 5 logged activities', n_deals: 4, calibration_error: 0.0933 },
-      long_cycle_enterprise: { description: 'Enterprise deals with long sales cycles', n_deals: 2, calibration_error: 0.3368 },
-    },
-  },
-  risk_model_evaluation: {
-    model_name: 'Risk Classification Model',
-    discrimination: { auc_roc: 0.5 },
-    calibration: { brier_score_calibrated: 0.2226, ece_calibrated: 0.0194 },
-  },
-  critic_ab_test: {
-    n_deals: 200,
-    control: { decision_quality: 0.395, false_urgency_rate: 0.0, false_urgency_count: 0, avg_calibration_error: 0.1328 },
-    treatment: { decision_quality: 0.425, false_urgency_rate: 0.0, false_urgency_count: 0, avg_calibration_error: 0.1216 },
-    impact: { decision_quality_delta: 0.03, false_urgency_reduction_pct: 0, calibration_improvement: 0.0112 },
-    interpretation: 'The Critic Agent improved decision quality by 3.0% and risk score calibration by 0.0112 points.',
-  },
-}
-
-const MOCK_OVERVIEW: PipelineOverview = {
-  total_deals: 75,
-  deals_at_risk: 52,
-  deals_healthy: 23,
-  avg_win_probability: 0.38,
-  avg_risk_score: 0.67,
-  risk_distribution: { low: 15, medium: 18, high: 25, critical: 17 },
-}
-
 const RISK_COLORS: Record<string, string> = {
   low: '#10b981',
   medium: '#f59e0b',
@@ -89,13 +13,47 @@ const RISK_COLORS: Record<string, string> = {
 }
 
 export default function EvalDashboard() {
-  const [evalData, setEvalData] = useState<EvaluationData>(MOCK_EVAL)
-  const [overview, setOverview] = useState<PipelineOverview>(MOCK_OVERVIEW)
+  const [evalData, setEvalData] = useState<EvaluationData | null>(null)
+  const [overview, setOverview] = useState<PipelineOverview | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    getEvaluationResults().then(setEvalData).catch(() => {})
-    getPipelineOverview().then(setOverview).catch(() => {})
+    setLoading(true)
+    setError(null)
+
+    Promise.all([getEvaluationResults(), getPipelineOverview()])
+      .then(([evalRes, overviewRes]) => {
+        setEvalData(evalRes)
+        setOverview(overviewRes)
+      })
+      .catch((err) => {
+        setError('Failed to load evaluation data. Ensure the backend is running on port 8000.')
+        console.error(err)
+      })
+      .finally(() => setLoading(false))
   }, [])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-slate-400">Loading evaluation data...</div>
+      </div>
+    )
+  }
+
+  if (error || !evalData || !overview) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <p className="text-red-600 font-medium">{error || 'Failed to load data'}</p>
+          <p className="text-sm text-slate-400 mt-2">
+            Start the backend: <code className="bg-slate-100 px-2 py-1 rounded">uvicorn backend.api.main:app --reload</code>
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   const { win_model_evaluation: winEval, critic_ab_test: abTest } = evalData
 
@@ -258,15 +216,19 @@ export default function EvalDashboard() {
         <div className="bg-white rounded-lg border border-slate-200 p-6">
           <h3 className="font-semibold text-slate-900 mb-1">SHAP Feature Importance</h3>
           <p className="text-xs text-slate-400 mb-4">Mean absolute SHAP values — what drives predictions</p>
-          <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={shapData} layout="vertical" margin={{ left: 130 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" />
-              <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 11 }} />
-              <Tooltip />
-              <Bar dataKey="value" fill="#3b82f6" radius={[0, 4, 4, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+          {shapData.length > 0 ? (
+            <ResponsiveContainer width="100%" height={280}>
+              <BarChart data={shapData} layout="vertical" margin={{ left: 130 }}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis type="number" />
+                <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 11 }} />
+                <Tooltip />
+                <Bar dataKey="value" fill="#3b82f6" radius={[0, 4, 4, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          ) : (
+            <p className="text-sm text-slate-400">SHAP analysis not available. Run evaluation harness.</p>
+          )}
         </div>
 
         {/* Risk Distribution */}
@@ -295,7 +257,7 @@ export default function EvalDashboard() {
       </div>
 
       {/* Section 5: Failure Modes */}
-      {winEval.failure_modes && (
+      {winEval.failure_modes && Object.keys(winEval.failure_modes).length > 0 && (
         <div className="bg-white rounded-lg border border-slate-200 p-6">
           <h3 className="font-semibold text-slate-900 mb-1">Documented Failure Modes</h3>
           <p className="text-xs text-slate-400 mb-4">

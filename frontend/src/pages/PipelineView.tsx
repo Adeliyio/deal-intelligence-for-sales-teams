@@ -1,49 +1,61 @@
 import { useState, useEffect } from 'react'
 import DealCard from '../components/DealCard'
-import { getPipelineOverview, PipelineOverview } from '../utils/api'
+import { getPipelineOverview, getDealsList, PipelineOverview, DealListItem } from '../utils/api'
 
 interface PipelineViewProps {
   onDealSelect: (dealId: string) => void
 }
 
-// Mock deal data for display (in production, fetched from API)
-const MOCK_DEALS = [
-  { deal_id: 'DEAL-0001', win_probability: 0.09, risk_level: 'critical', deal_value: 392800, stage: 'closed_lost', silence_gap_days: 10, engagement_per_week: 0.168 },
-  { deal_id: 'DEAL-0005', win_probability: 0.86, risk_level: 'low', deal_value: 325300, stage: 'closed_won', silence_gap_days: 2, engagement_per_week: 1.711 },
-  { deal_id: 'DEAL-0010', win_probability: 0.45, risk_level: 'medium', deal_value: 18900, stage: 'qualification', silence_gap_days: 8, engagement_per_week: 0.35 },
-  { deal_id: 'DEAL-0015', win_probability: 0.22, risk_level: 'high', deal_value: 67500, stage: 'proposal', silence_gap_days: 18, engagement_per_week: 0.12 },
-  { deal_id: 'DEAL-0020', win_probability: 0.71, risk_level: 'low', deal_value: 12400, stage: 'negotiation', silence_gap_days: 3, engagement_per_week: 0.89 },
-  { deal_id: 'DEAL-0025', win_probability: 0.33, risk_level: 'high', deal_value: 156000, stage: 'qualification', silence_gap_days: 22, engagement_per_week: 0.08 },
-  { deal_id: 'DEAL-0030', win_probability: 0.58, risk_level: 'medium', deal_value: 43200, stage: 'proposal', silence_gap_days: 6, engagement_per_week: 0.45 },
-  { deal_id: 'DEAL-0035', win_probability: 0.12, risk_level: 'critical', deal_value: 89000, stage: 'negotiation', silence_gap_days: 31, engagement_per_week: 0.05 },
-]
-
 export default function PipelineView({ onDealSelect }: PipelineViewProps) {
   const [overview, setOverview] = useState<PipelineOverview | null>(null)
+  const [deals, setDeals] = useState<DealListItem[]>([])
   const [filter, setFilter] = useState<string>('all')
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    getPipelineOverview()
-      .then(setOverview)
-      .catch(() => {
-        // Use mock data if API unavailable
-        setOverview({
-          total_deals: 75,
-          deals_at_risk: 52,
-          deals_healthy: 23,
-          avg_win_probability: 0.38,
-          avg_risk_score: 0.67,
-          risk_distribution: { low: 15, medium: 18, high: 25, critical: 17 },
-        })
+    setLoading(true)
+    setError(null)
+
+    Promise.all([getPipelineOverview(), getDealsList()])
+      .then(([overviewData, dealsData]) => {
+        setOverview(overviewData)
+        setDeals(dealsData)
       })
+      .catch((err) => {
+        setError('Failed to load pipeline data. Ensure the backend is running on port 8000.')
+        console.error(err)
+      })
+      .finally(() => setLoading(false))
   }, [])
 
-  const filteredDeals = MOCK_DEALS.filter((deal) => {
+  const filteredDeals = deals.filter((deal) => {
     if (filter === 'all') return true
     if (filter === 'at-risk') return ['high', 'critical'].includes(deal.risk_level)
     if (filter === 'healthy') return ['low', 'medium'].includes(deal.risk_level)
     return true
   })
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-slate-400">Loading pipeline data...</div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <p className="text-red-600 font-medium">{error}</p>
+          <p className="text-sm text-slate-400 mt-2">
+            Start the backend: <code className="bg-slate-100 px-2 py-1 rounded">uvicorn backend.api.main:app --reload</code>
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -86,6 +98,9 @@ export default function PipelineView({ onDealSelect }: PipelineViewProps) {
             </button>
           ))}
         </div>
+        <span className="text-sm text-slate-400 ml-auto">
+          {filteredDeals.length} deals
+        </span>
       </div>
 
       {/* Deal grid */}

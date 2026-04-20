@@ -27,7 +27,7 @@ function App() {
           <div className="flex items-center gap-8">
             <div>
               <h1 className="text-xl font-bold text-slate-900">
-                Deal Intelligence
+                Tommy's Deal Intelligence
               </h1>
               <p className="text-sm text-slate-500">Revenue Intelligence Copilot</p>
             </div>

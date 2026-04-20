@@ -13,40 +13,17 @@ interface DealDetailProps {
 export default function DealDetail({ dealId, onBack }: DealDetailProps) {
   const [analysis, setAnalysis] = useState<DealAnalysis | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<'overview' | 'agents' | 'simulator'>('overview')
 
   useEffect(() => {
     setLoading(true)
+    setError(null)
     analyzeDeal(dealId)
       .then(setAnalysis)
-      .catch(() => {
-        // Mock data for display when API is unavailable
-        setAnalysis({
-          deal_id: dealId,
-          predictions: {
-            win_probability: 0.45,
-            confidence_lower: 0.32,
-            confidence_upper: 0.58,
-            confidence_width: 0.26,
-            risk_score: 0.68,
-            risk_level: 'high',
-            is_at_risk: true,
-            low_confidence_warning: false,
-          },
-          historical_matches: [
-            { deal_id: 'DEAL-0036', outcome: 'lost', similarity: 0.95, engagement_per_week: 0.12, silence_gap_days: 15, duration_days: 19 },
-            { deal_id: 'DEAL-0012', outcome: 'lost', similarity: 0.91, engagement_per_week: 0.08, silence_gap_days: 22, duration_days: 27 },
-            { deal_id: 'DEAL-0044', outcome: 'won', similarity: 0.78, engagement_per_week: 0.65, silence_gap_days: 4, duration_days: 35 },
-          ],
-          feature_importance: [
-            { feature: 'engagement_score', importance: 0.405, importance_pct: 40.5 },
-            { feature: 'engagement_per_week', importance: 0.314, importance_pct: 31.4 },
-            { feature: 'response_count', importance: 0.270, importance_pct: 27.0 },
-            { feature: 'deal_velocity_ratio', importance: 0.007, importance_pct: 0.7 },
-            { feature: 'avg_days_per_stage', importance: 0.003, importance_pct: 0.3 },
-          ],
-          strategy: 'URGENT: 18-day silence gap detected. Immediate outreach recommended.\nNo economic buyer identified. Prioritize executive stakeholder mapping.\nSingle-threaded deal. Risk of champion loss. Multi-thread immediately.',
-        })
+      .catch((err) => {
+        setError('Failed to analyze deal. Ensure the backend is running.')
+        console.error(err)
       })
       .finally(() => setLoading(false))
   }, [dealId])
@@ -59,7 +36,18 @@ export default function DealDetail({ dealId, onBack }: DealDetailProps) {
     )
   }
 
-  if (!analysis) return null
+  if (error || !analysis) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <p className="text-red-600 font-medium">{error || 'Failed to load deal analysis'}</p>
+          <button onClick={onBack} className="mt-4 text-primary-600 hover:text-primary-800 text-sm font-medium">
+            &larr; Back to Pipeline
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   const { predictions } = analysis
 
@@ -170,12 +158,12 @@ export default function DealDetail({ dealId, onBack }: DealDetailProps) {
                       </div>
                       <div className="text-xs text-slate-500">
                         <span>Similarity: {(match.similarity * 100).toFixed(0)}%</span>
-                        {match.silence_gap_days && (
+                        {match.silence_gap_days != null && (
                           <span className="ml-3">
                             Silence: {match.silence_gap_days.toFixed(0)}d
                           </span>
                         )}
-                        {match.duration_days && (
+                        {match.duration_days != null && (
                           <span className="ml-3">
                             Duration: {match.duration_days}d
                           </span>

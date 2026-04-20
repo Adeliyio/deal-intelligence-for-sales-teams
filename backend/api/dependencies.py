@@ -53,13 +53,12 @@ class AppState:
             self.risk_model.load(risk_model_path)
             print("  Risk model loaded")
 
-        # Load vector store
-        index_path = "data/vector_store/faiss_index"
-        if os.path.exists(os.path.join(index_path, "index.faiss")):
+        # Build vector store from features (needs normalization params)
+        if self.features_df is not None:
             store = DealVectorStore(embedding_mode="feature")
-            store.load(index_path)
+            store.build_index(self.features_df)
             self.retriever = DealRetriever(store)
-            print("  Vector store loaded")
+            print("  Vector store built")
 
         self.is_ready = True
         print("All resources loaded.")
