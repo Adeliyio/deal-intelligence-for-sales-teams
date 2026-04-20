@@ -1,0 +1,76 @@
+deal_id,avg_response_time_hours,median_response_time_hours,response_count,engagement_score,engagement_per_week,total_activities,avg_days_per_stage,total_transitions,silence_gap_days,silence_gap_severity,last_meaningful_activity,stakeholder_count,has_economic_buyer,decision_maker_ratio,stakeholder_breadth,decay_weighted_engagement,deal_value,deal_size_bucket,industry,source,outcome,stage,duration_days,deal_velocity_ratio
+DEAL-0001,159.46,191.9,3,0.6,0.168,7,8.0,3,10.0,6.58,2024-04-12 13:40:00,1,False,1.0,1,0.732,392800.0,enterprise,retail,outbound,lost,closed_lost,25,1.844
+DEAL-0002,,,0,0.4,0.233,2,,0,215.0,215.0,2024-02-09 17:21:00,2,True,1.0,2,0.0,24400.0,smb,manufacturing,referral,active,prospecting,12,
+DEAL-0003,193.64,232.1,5,1.15,0.218,13,11.67,3,8.0,30.463,2024-02-26 11:15:00,1,False,1.0,1,1.023,5500.0,smb,financial_services,outbound,lost,closed_lost,37,0.9
+DEAL-0004,,,0,0.5,0.069,6,16.67,3,31.0,25.249,2024-04-15 12:22:00,2,True,1.0,2,0.275,286700.0,enterprise,retail,outbound,lost,closed_lost,51,0.885
+DEAL-0005,45.18,27.88,18,8.85,1.033,45,14.5,4,3.0,3.984,2024-07-18 17:56:00,3,True,0.667,3,3.128,325300.0,enterprise,healthcare,inbound,won,closed_won,60,1.017
+DEAL-0006,114.05,126.87,11,1.6,0.153,16,36.0,2,21.0,8.113,2024-03-07 10:43:00,3,False,0.333,2,0.372,38000.0,mid_market,technology,inbound,lost,closed_lost,73,0.389
+DEAL-0007,61.22,47.28,6,2.3,0.474,15,8.0,4,2.0,0.609,2024-02-28 10:57:00,4,True,0.5,3,1.855,27300.0,mid_market,healthcare,referral,won,closed_won,34,1.656
+DEAL-0008,51.45,45.74,20,4.7,0.866,34,9.0,4,0.0,0.0,2024-03-15 17:13:00,3,False,0.333,2,3.537,11500.0,smb,retail,inbound,won,closed_won,38,1.389
+DEAL-0009,20.0,21.29,10,5.45,1.526,25,6.0,4,0.0,0.0,2024-04-18 15:10:00,4,True,0.75,4,4.005,35600.0,mid_market,media,inbound,won,closed_won,25,2.208
+DEAL-0010,50.87,26.8,14,3.1,0.748,23,6.75,4,0.0,0.0,2024-02-16 17:43:00,3,True,0.667,3,2.861,78000.0,mid_market,financial_services,referral,won,closed_won,29,1.963
+DEAL-0011,,,0,0.0,0.0,2,11.0,1,,,,2,False,0.5,1,0.225,22300.0,smb,manufacturing,inbound,lost,closed_lost,11,0.955
+DEAL-0012,209.11,310.75,3,1.0,0.259,6,8.67,3,7.0,3.445,2024-06-18 14:58:00,1,False,1.0,1,0.615,19300.0,smb,technology,outbound,lost,closed_lost,27,1.0
+DEAL-0013,39.85,39.85,2,0.85,0.138,5,21.0,2,28.0,14.241,2024-03-20 16:39:00,2,True,1.0,2,0.276,7200.0,smb,media,referral,lost,closed_lost,43,0.524
+DEAL-0014,103.25,42.88,11,2.2,0.481,21,7.5,4,2.0,2.096,2024-05-08 08:51:00,3,True,0.667,2,2.743,20100.0,smb,manufacturing,referral,won,closed_won,32,1.4
+DEAL-0015,130.95,131.12,4,1.05,0.223,7,16.0,2,176.0,57.701,2024-03-20 10:53:00,2,True,1.0,2,0.0,72500.0,mid_market,education,outbound,active,negotiation,33,0.828
+DEAL-0016,80.98,71.88,9,3.2,0.896,19,6.0,4,4.0,3.384,2024-05-29 17:24:00,3,True,0.667,3,2.561,23100.0,smb,technology,inbound,won,closed_won,25,1.445
+DEAL-0017,,,0,0.2,0.088,3,16.0,1,9.0,1.286,2024-07-10 13:02:00,2,False,0.5,2,0.361,15700.0,smb,education,inbound,lost,closed_lost,16,0.656
+DEAL-0018,,,0,0.3,0.075,6,13.5,2,5.0,0.714,2024-03-15 17:26:00,1,False,1.0,1,0.485,52300.0,mid_market,technology,inbound,lost,closed_lost,28,1.037
+DEAL-0019,,,0,0.0,0.0,6,,0,,,,2,False,0.5,1,0.0,25000.0,smb,financial_services,outbound,active,prospecting,14,
+DEAL-0020,,,0,0.0,0.0,3,10.0,3,,,,1,False,1.0,1,0.22,58600.0,mid_market,education,inbound,lost,closed_lost,31,1.325
+DEAL-0021,103.23,103.23,1,0.6,0.162,5,26.0,1,97.0,379.249,2024-06-07 15:22:00,2,False,0.5,2,0.007,17600.0,smb,education,inbound,active,proposal,26,0.404
+DEAL-0022,81.22,81.22,2,0.7,0.233,4,21.0,1,3.0,2.164,2024-07-10 09:34:00,3,True,0.667,2,0.726,19200.0,smb,media,inbound,lost,closed_lost,21,0.524
+DEAL-0023,,,0,0.3,0.078,5,27.0,1,25.0,3.571,2024-04-23 13:22:00,3,False,0.333,2,0.378,75700.0,mid_market,technology,inbound,lost,closed_lost,27,0.519
+DEAL-0024,,,0,0.3,0.075,4,8.67,3,25.0,3.571,2024-06-24 11:17:00,2,True,1.0,2,0.386,43100.0,mid_market,education,referral,lost,closed_lost,28,1.528
+DEAL-0025,84.23,93.73,19,5.3,0.687,36,13.0,4,0.0,0.0,2024-08-06 09:19:00,3,True,0.667,3,3.653,88500.0,mid_market,manufacturing,referral,won,closed_won,54,1.019
+DEAL-0026,35.84,23.78,16,3.9,0.738,28,8.5,4,1.0,0.439,2024-04-12 14:05:00,5,True,0.6,4,3.279,18300.0,smb,retail,inbound,won,closed_won,37,1.471
+DEAL-0027,7.22,7.22,1,0.6,0.145,9,9.33,3,22.0,13.434,2024-05-27 15:13:00,2,True,1.0,2,0.748,19200.0,smb,technology,outbound,lost,closed_lost,29,0.929
+DEAL-0028,,,0,0.4,0.093,3,14.5,2,15.0,9.009,2024-03-19 15:48:00,2,True,1.0,2,0.332,12400.0,smb,media,inbound,lost,closed_lost,30,0.759
+DEAL-0029,148.79,108.88,14,1.5,0.309,19,16.5,2,148.0,3717.453,2024-04-17 12:35:00,3,True,1.0,3,0.001,12000.0,smb,technology,outbound,active,negotiation,34,0.525
+DEAL-0030,52.48,25.82,15,7.35,0.725,42,17.0,4,8.0,4.978,2024-07-18 16:06:00,6,True,0.667,4,2.785,288000.0,enterprise,education,referral,won,closed_won,71,0.868
+DEAL-0031,,,0,1.0,0.636,4,11.0,1,122.0,122.0,2024-05-13 10:56:00,4,True,0.5,3,0.002,16100.0,smb,media,referral,active,proposal,11,1.0
+DEAL-0032,,,0,0.2,0.127,3,3.0,3,6.0,0.857,2024-05-01 17:28:00,3,False,0.333,3,0.415,16100.0,smb,media,referral,lost,closed_lost,11,3.667
+DEAL-0033,69.3,72.15,11,4.45,0.537,26,14.0,4,0.0,0.0,2024-07-19 15:19:00,3,True,0.667,3,2.792,99300.0,mid_market,healthcare,inbound,won,closed_won,58,0.946
+DEAL-0034,,,0,0.3,0.162,1,6.0,2,79.0,11.286,2024-06-24 17:31:00,2,True,1.0,2,0.006,10900.0,smb,media,outbound,active,negotiation,13,1.833
+DEAL-0035,35.23,4.77,5,2.8,1.032,13,4.0,4,3.0,1.829,2024-05-23 17:29:00,3,True,0.667,2,2.16,17600.0,smb,manufacturing,outbound,won,closed_won,19,2.625
+DEAL-0036,119.2,166.6,5,0.3,0.111,6,6.0,3,9.0,1.286,2024-06-21 08:13:00,1,False,1.0,1,0.566,49600.0,mid_market,healthcare,outbound,lost,closed_lost,19,2.208
+DEAL-0037,111.51,127.6,13,2.1,0.639,18,11.0,2,119.0,90.856,2024-05-15 16:51:00,1,False,1.0,1,0.006,5800.0,smb,media,inbound,active,negotiation,23,1.0
+DEAL-0038,,,0,0.2,0.064,7,7.0,3,8.0,1.143,2024-03-22 11:18:00,3,False,0.333,2,0.722,6000.0,smb,manufacturing,outbound,lost,closed_lost,22,1.5
+DEAL-0039,53.38,46.25,29,8.0,1.018,54,13.0,4,4.0,1.375,2024-06-04 17:55:00,6,True,0.333,2,4.592,385800.0,enterprise,financial_services,referral,won,closed_won,55,1.135
+DEAL-0040,46.27,46.27,1,0.65,0.142,9,32.0,1,225.0,130.993,2024-01-31 15:14:00,3,True,0.667,2,0.0,77200.0,mid_market,retail,inbound,active,proposal,32,0.414
+DEAL-0041,21.63,6.92,6,4.4,1.711,18,4.0,4,0.0,0.0,2024-04-09 12:23:00,3,True,1.0,2,3.724,8700.0,smb,retail,inbound,won,closed_won,18,3.125
+DEAL-0042,112.17,130.82,8,1.45,0.236,13,43.0,1,10.0,4.069,2024-04-02 12:13:00,2,True,1.0,2,0.804,7400.0,smb,retail,inbound,lost,closed_lost,43,0.291
+DEAL-0043,,,0,0.0,0.0,5,,0,,,,2,True,1.0,2,0.0,60600.0,mid_market,healthcare,referral,active,prospecting,21,
+DEAL-0044,196.76,205.26,6,0.65,0.12,10,9.0,4,6.0,1.382,2024-07-10 15:16:00,4,True,0.75,3,0.974,454700.0,enterprise,manufacturing,inbound,won,closed_won,38,1.639
+DEAL-0045,36.89,37.92,4,1.3,0.165,13,27.0,2,30.0,7.406,2024-06-14 17:58:00,1,False,1.0,1,0.449,76300.0,mid_market,media,referral,lost,closed_lost,55,0.491
+DEAL-0046,48.43,48.43,3,0.8,0.224,5,12.0,2,8.0,5.264,2024-04-04 12:46:00,1,False,1.0,1,0.597,21200.0,smb,financial_services,referral,lost,closed_lost,25,0.875
+DEAL-0047,2.48,2.48,1,0.3,0.062,4,34.0,1,30.0,4.286,2024-02-21 14:58:00,3,True,0.667,2,0.186,10500.0,smb,manufacturing,inbound,lost,closed_lost,34,0.309
+DEAL-0048,52.53,52.53,1,1.1,0.77,4,,0,119.0,119.0,2024-05-15 16:29:00,3,True,1.0,2,0.003,21300.0,smb,technology,outbound,active,prospecting,10,
+DEAL-0049,,,0,0.0,0.0,3,14.0,1,,,,1,False,1.0,1,0.007,85300.0,mid_market,technology,outbound,active,proposal,14,1.0
+DEAL-0050,74.5,74.5,1,0.25,0.051,5,11.0,3,29.0,4.143,2024-04-26 12:24:00,2,True,1.0,2,0.313,443400.0,enterprise,technology,outbound,lost,closed_lost,34,1.341
+DEAL-0051,88.02,88.02,1,0.3,0.054,9,12.33,3,34.0,4.857,2024-02-06 08:56:00,1,False,1.0,1,0.466,62200.0,mid_market,technology,inbound,lost,closed_lost,39,1.135
+DEAL-0052,,,0,0.0,0.0,8,19.0,1,,,,3,True,0.667,3,0.836,6700.0,smb,retail,inbound,lost,closed_lost,19,0.658
+DEAL-0053,60.5,35.29,24,7.9,0.7,54,19.5,4,9.0,0.502,2024-09-06 10:54:00,5,True,0.8,3,3.081,412500.0,enterprise,media,inbound,won,closed_won,79,0.756
+DEAL-0054,68.56,69.78,18,3.65,0.581,29,10.5,4,3.0,4.028,2024-08-09 09:29:00,5,True,0.4,4,2.191,20200.0,smb,manufacturing,referral,won,closed_won,44,1.0
+DEAL-0055,,,0,0.2,0.045,4,15.0,2,18.0,2.571,2024-06-10 09:08:00,3,False,0.333,2,0.306,158600.0,enterprise,retail,inbound,lost,closed_lost,31,0.983
+DEAL-0056,90.85,50.33,14,2.6,0.387,29,11.5,4,5.0,3.671,2024-06-11 09:24:00,5,True,0.6,3,2.245,336800.0,enterprise,manufacturing,inbound,won,closed_won,47,1.283
+DEAL-0057,65.65,72.73,3,2.05,0.897,10,,0,100.0,100.876,2024-06-03 17:09:00,1,False,1.0,1,0.012,11600.0,smb,education,outbound,active,prospecting,16,
+DEAL-0058,,,0,0.8,0.14,6,40.0,1,8.0,2.101,2024-07-29 11:41:00,1,False,1.0,1,0.72,249900.0,enterprise,technology,inbound,lost,closed_lost,40,0.369
+DEAL-0059,110.5,54.62,4,0.95,0.391,7,,0,62.0,445.681,2024-07-11 17:32:00,3,True,0.667,3,0.048,24400.0,smb,retail,inbound,active,qualification,17,
+DEAL-0060,,,0,0.2,0.04,6,35.0,1,16.0,2.286,2024-06-24 15:57:00,1,False,1.0,1,0.52,59100.0,mid_market,retail,outbound,lost,closed_lost,35,0.379
+DEAL-0061,45.76,24.77,7,2.1,0.735,12,4.5,4,1.0,0.741,2024-05-28 12:10:00,5,True,0.4,4,2.201,24000.0,smb,education,outbound,won,closed_won,20,2.333
+DEAL-0062,,,0,0.0,0.0,0,16.0,1,,,,3,False,0.333,3,0.0,10300.0,smb,retail,referral,lost,closed_lost,16,0.781
+DEAL-0063,,,0,0.0,0.0,1,10.0,2,,,,1,False,1.0,1,0.101,76400.0,mid_market,retail,inbound,lost,closed_lost,20,1.325
+DEAL-0064,109.0,120.13,19,3.85,0.627,31,43.0,1,23.0,20.644,2024-08-20 13:20:00,1,False,1.0,1,0.85,37400.0,mid_market,technology,referral,active,proposal,43,0.326
+DEAL-0065,,,0,0.6,0.467,4,4.0,2,133.0,133.0,2024-05-02 09:31:00,4,False,0.25,2,0.001,21600.0,smb,technology,referral,active,negotiation,9,2.167
+DEAL-0066,22.36,22.36,2,1.0,0.35,12,,0,181.0,134.081,2024-03-14 17:22:00,2,True,1.0,2,0.0,100000.0,mid_market,education,referral,active,prospecting,20,
+DEAL-0067,47.1,47.1,1,0.65,0.253,3,8.5,2,224.0,175.967,2024-01-31 17:57:00,2,False,0.5,2,0.0,14000.0,smb,education,inbound,active,negotiation,18,1.235
+DEAL-0068,85.86,85.86,2,0.3,0.162,3,6.0,2,4.0,0.571,2024-05-24 14:31:00,1,False,1.0,1,0.455,18400.0,smb,healthcare,outbound,lost,closed_lost,13,1.75
+DEAL-0069,,,0,0.3,0.191,1,,0,120.0,17.143,2024-05-15 13:43:00,2,False,0.5,2,0.001,67100.0,mid_market,education,referral,active,prospecting,11,
+DEAL-0070,119.19,150.37,4,0.55,0.148,9,12.5,2,0.0,0.0,2024-05-16 16:22:00,2,False,0.5,2,0.884,92700.0,mid_market,manufacturing,referral,lost,closed_lost,26,1.06
+DEAL-0071,28.51,28.51,2,0.25,0.044,4,19.5,2,37.0,5.286,2024-04-04 17:48:00,1,False,1.0,1,0.113,23100.0,smb,manufacturing,outbound,lost,closed_lost,40,0.538
+DEAL-0072,42.58,47.51,4,1.05,0.367,10,6.33,3,9.0,6.667,2024-04-17 14:31:00,1,False,1.0,1,1.311,59500.0,mid_market,technology,outbound,lost,closed_lost,20,2.212
+DEAL-0073,,,0,0.0,0.0,0,3.0,2,,,,4,False,0.25,3,0.0,11600.0,smb,financial_services,outbound,active,negotiation,7,3.5
+DEAL-0074,171.05,171.05,1,0.5,0.045,6,78.0,1,39.0,21.757,2024-05-27 13:04:00,2,True,1.0,2,0.084,38500.0,mid_market,manufacturing,inbound,lost,closed_lost,78,0.17
+DEAL-0075,110.18,62.97,4,1.6,0.224,11,24.5,2,17.0,1.891,2024-05-17 15:03:00,3,True,0.667,2,0.685,340800.0,enterprise,financial_services,inbound,lost,closed_lost,50,0.602
